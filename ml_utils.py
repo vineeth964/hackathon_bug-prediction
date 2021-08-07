@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score
 from sklearn import svm
 from pandas import read_csv
 import numpy as np 
-
+import subprocess
 
 # define a Gaussain NB classifier
 clf = GaussianNB()
@@ -28,6 +28,9 @@ def load_model():
     acc = accuracy_score(y_test, clf.predict(X_test))
     print(f"Model trained with accuracy: {round(acc, 3)}")
 
+    # subprocess.call(["jupyter","nbconvert","--to","notebook","--inplace","--execute","dataset/h2o_explainability.ipynb"],shell=True)
+    # subprocess.call(["jupyter","nbconvert","--execute","--to","html","dataset/h2o_explainability.ipynb"],shell=True)
+
 
 # function to predict the if its a bug using the model
 def predict(query_data):
@@ -40,10 +43,7 @@ def predict(query_data):
 def retrain(data):
     # pull out the relevant X and y from the FeedbackIn object
     X = [list(d.dict().values())[:-1] for d in data]
-    # print("retrain of X", X)
     y = [r_classes[d.defects] for d in data]
-    # print("retrain of y", y)
-    # print("retrain of y", type(y))
-    # fit the classifier again based on the new data 
 
+    # fitting the classifier again based on the new data 
     clf.fit(X, y)
