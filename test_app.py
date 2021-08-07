@@ -16,27 +16,27 @@ def test_ping():
 def test_bug_pred_true():
     # defining a sample payload for the testcase
     payload = {
-    "lines_of_code": 0,
-    "cyclomatic_complexity": 0,
-    "essential_complexity": 0,
-    "design_complexity": 0,
+    "lines_of_code": 5550,
+    "cyclomatic_complexity": 45,
+    "essential_complexity": 43543,
+    "design_complexity": 54645,
     "totalo_perators_operands": 234,
     "volume": 0,
-    "program_length": 0,
+    "program_length": 234,
     "difficulty": 0,
     "intelligence": 0,
     "effort": 0,
     "b": 0,
-    "time_estimator": 23423,
+    "time_estimator": 23,
     "lOCode": 0,
     "lOComment": 0,
     "lOBlank": 0,
-    "lOCodeAndComment": 2387,
+    "lOCodeAndComment": 2,
     "uniq_Op": 0,
-    "uniq_Opnd": 0,
-    "total_Op": 0,
-    "total_Opnd": 0,
-    "branchCount": 0,
+    "uniq_Opnd": 22,
+    "total_Op": 22,
+    "total_Opnd": 333,
+    "branchCount": 33,
     }
     with TestClient(app) as client:
         response = client.post("/predict_bug", json=payload)
