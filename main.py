@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from ml_utils import load_model, predict, retrain
 from typing import List
+from fastapi.responses import FileResponse
 
 # defining the main app
 app = FastAPI(title="Bug Predictor", docs_url="/")
@@ -88,7 +89,15 @@ def feedback_loop(data: List[FeedbackIn]):
     retrain(data)
     return {"detail": "Feedback loop successful"}
 
+@app.get("/explain_model", status_code=200)
+async def explain_model():
+    file = "h2o_explainability.html"
+    return FileResponse(file, filename="explainability.html")
 
+@app.get("/lime_bug_probabilities", status_code=200)
+async def lime_bug_probabilities():
+    file = "lime_defect_explanation.html"
+    return FileResponse(file, filename="lime_bug_probabilities.html")
 
 # Main function to start the app when main.py is called
 if __name__ == "__main__":
